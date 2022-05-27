@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30161D4628407BE2002AC26A /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30161D4528407BE2002AC26A /* HabitViewModel.swift */; };
+		30161D4828408010002AC26A /* AddNewHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30161D4728408010002AC26A /* AddNewHabit.swift */; };
 		9180C937283F49C400DA7353 /* Habit_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180C936283F49C400DA7353 /* Habit_TrackerApp.swift */; };
 		9180C939283F49C400DA7353 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9180C938283F49C400DA7353 /* ContentView.swift */; };
 		9180C93B283F49C500DA7353 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9180C93A283F49C500DA7353 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		30161D4528407BE2002AC26A /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
+		30161D4728408010002AC26A /* AddNewHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewHabit.swift; sourceTree = "<group>"; };
 		9180C933283F49C400DA7353 /* Habit Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habit Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9180C936283F49C400DA7353 /* Habit_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit_TrackerApp.swift; sourceTree = "<group>"; };
 		9180C938283F49C400DA7353 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				9180C94B283F4ED100DA7353 /* Home.swift */,
+				30161D4728408010002AC26A /* AddNewHabit.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				9180C940283F49C500DA7353 /* Persistence.swift in Sources */,
 				9180C943283F49C500DA7353 /* Habit_Tracker.xcdatamodeld in Sources */,
 				9180C94C283F4ED100DA7353 /* Home.swift in Sources */,
+				30161D4828408010002AC26A /* AddNewHabit.swift in Sources */,
 				30161D4628407BE2002AC26A /* HabitViewModel.swift in Sources */,
 				9180C939283F49C400DA7353 /* ContentView.swift in Sources */,
 				9180C937283F49C400DA7353 /* Habit_TrackerApp.swift in Sources */,

@@ -43,9 +43,10 @@ struct Home: View {
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .sheet(isPresented: $viewModel.addNewHabit) {
-                        
+                        viewModel.resetDate()
                     } content: {
-                        
+                        AddNewHabit()
+                            .environmentObject(viewModel)
                     }
                 }
                 .padding(.vertical)
