@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 class HabitViewModel: ObservableObject {
-
+    
     @Published var addNewHabit = false
     
     @Published var title = ""
@@ -21,8 +21,7 @@ class HabitViewModel: ObservableObject {
     
     @Published var showTimePicker = false
     
-    
-    func addHabbit(context: NSManagedObjectContext) -> Bool {
+    func addHabbit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
         habit.title = title
         habit.color = habitColor
@@ -34,6 +33,12 @@ class HabitViewModel: ObservableObject {
         
         if isRemainderOn {
             // MARK: Scheduling Notifications
+            if let ids = try? await scheduleNotification() {
+                habit.notificationsIDs = ids
+                if let _ = try? context.save() {
+                    return true
+                }
+            }
         } else {
             // MARK: Adding Data
             if let _ = try? context.save() {
@@ -43,7 +48,45 @@ class HabitViewModel: ObservableObject {
         
         return false
     }
-
+    
+    // MARK: Adding Notifications
+    
+    func scheduleNotification() async throws -> [String] {
+        let content = UNMutableNotificationContent()
+        content.title = "Habit Remainder"
+        content.subtitle = remainderTex
+        content.sound = UNNotificationSound.default
+        
+        var notificationsIDs = [String]()
+        let calendar = Calendar.current
+        let weekDaySymbols: [String] = calendar.weekdaySymbols
+        
+        for weekDay in weekDays {
+            let id = UUID().uuidString
+            let hour = calendar.component(.hour, from: remainderDate)
+            let min = calendar.component(.minute, from: remainderDate)
+            let day = weekDaySymbols.firstIndex { currentDay in
+                return currentDay == weekDay
+            } ?? -1
+            
+            if day != -1 {
+                var components = DateComponents()
+                components.hour = hour
+                components.minute = min
+                components.weekday = day + 1
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                
+                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+                
+                try await UNUserNotificationCenter.current().add(request)
+                
+                notificationsIDs.append(id)
+            }
+        }
+        return notificationsIDs
+    }
+    
     // MARK: Erasing Content
     
     func resetDate() {
@@ -65,4 +108,3 @@ class HabitViewModel: ObservableObject {
         return true
     }
 }
-
