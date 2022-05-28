@@ -134,6 +134,9 @@ struct Home: View {
                 .fill(Color("TFBG").opacity(0.5))
         }
         .onTapGesture {
+            // MARK: Editing Habit
+            viewModel.editHabit = habit
+            viewModel.restoreEditData()
             viewModel.addNewHabit.toggle()
         }
     }

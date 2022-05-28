@@ -125,7 +125,7 @@ struct AddNewHabit: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Add Habit")
+            .navigationTitle(viewModel.editHabit != nil ? "Edit Habit" : "Add Habit")
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -135,6 +135,20 @@ struct AddNewHabit: View {
                         Image(systemName: "xmark.circle")
                     }
                     .tint(.white)
+                }
+                
+                // MARK: Delete Button
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        if viewModel.deleteHabit(context: env.managedObjectContext)  {
+                            env.dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .tint(.red)
+                    .opacity(viewModel.editHabit == nil ? 0 : 1)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {

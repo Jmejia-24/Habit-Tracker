@@ -19,7 +19,15 @@ class HabitViewModel: ObservableObject {
     @Published var remainderTex = ""
     @Published var remainderDate = Date()
     
+    // MARK: Remainder Time Picker
+    
     @Published var showTimePicker = false
+    
+    // MARK: Editing Habit
+    
+    @Published var editHabit: Habit?
+    
+    // MARK: Adding Habit to Database
     
     func addHabbit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
@@ -96,9 +104,37 @@ class HabitViewModel: ObservableObject {
         isRemainderOn = false
         remainderTex = ""
         remainderDate = Date()
+        editHabit = nil
     }
     
+    // MARK: Deleting Habit From DataBase
+
+    func deleteHabit(context: NSManagedObjectContext) -> Bool{
+        if let editHabit = editHabit {
+            context.delete(editHabit)
+            if let _ = try? context.save() {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    // MARK: Restoring Edit Data
+    
+    func restoreEditData() {
+        if let editHabit = editHabit {
+            title = editHabit.title ?? ""
+            habitColor = editHabit.color ?? "Card-1"
+            weekDays = editHabit.weekDays ?? []
+            isRemainderOn = editHabit.isRemainderOn
+            remainderTex = editHabit.remainderText ?? ""
+            remainderDate = editHabit.notificationDate ?? Date()
+        }
+    }
+
     // MARK: Done Button Status
+
     func doneStatus() -> Bool {
         let remainderStatus = isRemainderOn ? remainderTex == "" : false
         
