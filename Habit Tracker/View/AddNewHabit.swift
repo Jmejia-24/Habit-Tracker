@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddNewHabit: View {
     @EnvironmentObject var viewModel: HabitViewModel
+    
+    // MARK: Environment Values
     @Environment(\.self) var env
     
     var body: some View {
@@ -19,7 +21,7 @@ struct AddNewHabit: View {
                     .padding(.vertical, 10)
                     .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
                 
-                //MARK: Habit Color Picker
+                // MARK: Habit Color Picker
                 
                 HStack(spacing: 0) {
                     ForEach(1...7, id: \.self) { index in
@@ -45,16 +47,20 @@ struct AddNewHabit: View {
                 
                 Divider()
                 
+                // MARK: Frequency Selection
+                
                 VStack (alignment: .leading, spacing: 6) {
                     Text("Frecuency")
                         .font(.callout.bold())
                     let weekDays = Calendar.current.weekdaySymbols
                     HStack (spacing: 10) {
                         ForEach (weekDays, id: \.self) { day in
+                            
                             let index = viewModel.weekDays.firstIndex { value in
                                 return value == day
                             } ?? -1
                             
+                            // MARK: Limiting to First 2 Letters
                             Text(day.prefix(2))
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
@@ -80,6 +86,7 @@ struct AddNewHabit: View {
                 Divider()
                     .padding(.vertical, 10)
                 
+                // Hiding If Notification Access is Rejected
                 HStack {
                     VStack (alignment: .leading, spacing: 6) {
                         Text("Remainder")
@@ -96,6 +103,7 @@ struct AddNewHabit: View {
                     }
                     .labelsHidden()
                 }
+                .opacity(viewModel.notificationAccess ? 1 : 0)
                 
                 HStack (spacing: 12) {
                     Label {
@@ -119,6 +127,7 @@ struct AddNewHabit: View {
                 }
                 .frame(height: viewModel.isRemainderOn ? nil : 0)
                 .opacity(viewModel.isRemainderOn ? 1 : 0)
+                .opacity(viewModel.notificationAccess ? 1 : 0)
                 
             }
             .animation(.easeInOut, value: viewModel.isRemainderOn)

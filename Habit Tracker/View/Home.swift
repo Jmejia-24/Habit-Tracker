@@ -27,6 +27,8 @@ struct Home: View {
                 }
                 .padding(.bottom, 10)
             
+            // Making Add Button Center When Habits Empy
+
             ScrollView(habits.isEmpty ? .init() : .vertical, showsIndicators: false) {
                 VStack (spacing: 15) {
                     
@@ -35,6 +37,8 @@ struct Home: View {
                             HabitCardView(habit: habit)
                         }
                     }
+                    
+                    // MARK: Add Habit Button
                     
                     Button {
                         viewModel.addNewHabit.toggle()
@@ -51,6 +55,7 @@ struct Home: View {
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .sheet(isPresented: $viewModel.addNewHabit) {
+                        // MARK: Erasing All Existing Content
                         viewModel.resetDate()
                     } content: {
                         AddNewHabit()
@@ -64,6 +69,8 @@ struct Home: View {
         .padding()
     }
     
+    // MARK: Habit Card View
+
     @ViewBuilder
     func HabitCardView(habit: Habit) -> some View {
         VStack(spacing: 6) {
@@ -88,6 +95,8 @@ struct Home: View {
             }
             .padding(.horizontal, 10)
             
+            // MARK: Displaying Current Week and Marking Active Dates of Habit
+            
             let calendar = Calendar.current
             let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: Date())
             let symbols = calendar.weekdaySymbols
@@ -103,6 +112,7 @@ struct Home: View {
                     let item = activePlot[index]
                     
                     VStack(spacing: 6) {
+                        // MARK: Limiting to First 3 letters
                         Text(item.0.prefix(3))
                             .font(.caption)
                             .foregroundColor(.gray)
@@ -141,6 +151,8 @@ struct Home: View {
         }
     }
     
+    // MARK: Formatting Date
+
     private func getDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
