@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Habit" representedClassName="Habit" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isRemainderOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="notificationsIDs" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="notificationsIDs" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="remainderText" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="weekDays" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="weekDays" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
     </entity>
     <elements>
         <element name="Habit" positionX="-63" positionY="-18" width="128" height="149"/>

@@ -35,7 +35,7 @@ class HabitViewModel: ObservableObject {
         requestNotificationAccess()
     }
     
-    func requestNotificationAccess() {
+    private func requestNotificationAccess() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { status, _ in
             DispatchQueue.main.async {
                 self.notificationAccess = status
@@ -46,9 +46,9 @@ class HabitViewModel: ObservableObject {
     // MARK: Adding Habit to Database
     
     func addHabbit(context: NSManagedObjectContext) async -> Bool {
-        
+
         // MARK: Editing Data
-        
+
         var habit: Habit!
         if let editHabit = editHabit {
             habit = editHabit
@@ -58,8 +58,7 @@ class HabitViewModel: ObservableObject {
         } else {
             habit = Habit(context: context)
         }
-        
-        
+
         habit.title = title
         habit.color = habitColor
         habit.weekDays = weekDays
